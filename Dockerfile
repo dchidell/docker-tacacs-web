@@ -1,5 +1,5 @@
 FROM alpine:3.11 as base
-MAINTAINER David Chidell (dchidell@cisco.com)
+LABEL maintainer="David Chidell (dchidell@cisco.com)"
 ENV VERSION=201712190728
 ENV TAC_PLUS_BIN=/tacacs/sbin/tac_plus
 
