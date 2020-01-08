@@ -27,5 +27,5 @@ COPY --from=webproc /usr/local/bin/webproc /usr/local/bin/webproc
 COPY tac_base.cfg /etc/tac_plus/tac_base.cfg
 COPY tac_user.cfg /etc/tac_plus/tac_user.cfg
 #COPY entrypoint.sh /entrypoint.sh 
-ENTRYPOINT ["webproc","--on-exit","restart","-c","/etc/tac_plus/tac_user.cfg,/etc/tac_plus/tac_base.cfg","--","/tacacs/sbin/tac_plus","-f","/etc/tac_plus/tac_base.cfg"]
+ENTRYPOINT ["webproc","--on-exit","restart","-c","/etc/tac_plus/tac_user.cfg","/etc/tac_plus/tac_base.cfg","--","/tacacs/sbin/tac_plus","-f","/etc/tac_plus/tac_base.cfg"]
 EXPOSE 49 8080
