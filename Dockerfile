@@ -4,8 +4,7 @@ ENV VERSION=201712190728
 ENV TAC_PLUS_BIN=/tacacs/sbin/tac_plus
 
 FROM base as webproc
-ENV WEBPROC_VERSION 0.2.2
-ENV WEBPROC_URL https://github.com/jpillora/webproc/releases/download/$WEBPROC_VERSION/webproc_linux_amd64.gz
+ENV WEBPROC_URL https://github.com/jpillora/webproc/releases/download/v0.3.3/webproc_0.3.3_linux_amd64.gz
 RUN apk add --no-cache curl
 RUN curl -sL $WEBPROC_URL | gzip -d - > /usr/local/bin/webproc
 RUN chmod +x /usr/local/bin/webproc
@@ -27,5 +26,5 @@ COPY --from=webproc /usr/local/bin/webproc /usr/local/bin/webproc
 COPY tac_base.cfg /etc/tac_plus/tac_base.cfg
 COPY tac_user.cfg /etc/tac_plus/tac_user.cfg
 #COPY entrypoint.sh /entrypoint.sh 
-ENTRYPOINT ["webproc","--on-exit","restart","--config","/etc/tac_plus/tac_user.cfg,/etc/tac_plus/tac_base.cfg","--","/tacacs/sbin/tac_plus","-f","/etc/tac_plus/tac_base.cfg"]
+ENTRYPOINT ["webproc","--on-exit","restart","-s","continue","-c","/etc/tac_plus/tac_user.cfg","-c","/etc/tac_plus/tac_base.cfg","--","/tacacs/sbin/tac_plus","-f","/etc/tac_plus/tac_base.cfg"]
 EXPOSE 49 8080
